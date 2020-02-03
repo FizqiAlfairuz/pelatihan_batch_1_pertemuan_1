@@ -1,0 +1,316 @@
+---
+title: "Pelatihan R pertemuan 1"
+author: "Nashir Wahyudi"
+date: "2 Februari 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+> ## Apa itu R?
+
+<t/> R adalah bahasa pemrograman yang dirancang khusus untuk keperluan statistik dan komputasi statistik. pertama dikembangkan pada tahun 1993 oleh **Ross Ishaka** dan **Robert Gentleman** di Auckland University New Zeeland. R bersama dengan python kini menjadi standar *de facto* bagi para statistisi dan pengembang perangkat lunak statistika.
+
+  
+> ## Seberapa populer R?
+  
+  ![popularitas bahasa pemrograman R](C:\Users\Nashir\Downloads\MzM2NjYxNQ.jpeg)
+
+<t/> R berada di peringkat ke-5 diatas bahasa pemrogaraman javascript yang berada di posisi ke-6. salah satu faktor yang membuat R begitu populer adalah banyaknya statistisi dan peeliti yang menggunakan bahasa ini dalam penelitiannya. populernya terminologi Big Data juga menjadi penyebab populernya bahasa ini.
+
+
+> ## Kelebihan pakai R?
+
+1. *Open-source*.
+2. *Cross-platform language*.
+3. Setiap orang dapat berkontribusi di R.
+4. R di pakai di banyak perusahaan level dunia (Google, Microsoft, Facebook)
+
+
+> ## Getting started with R
+
+### Instalasi R environment
+
+ 1. Buka halaman mirror web R CRAN di Indonesia pada link https://repo.bppt.go.id/cran/bin/windows/base/
+ 2. Kemudian, klik link Download R 3.*.* for Windows (Asumsi menggunakan OS Windows), pastikan proses mengunduh selesai 100%.
+ 3. Install file yang terdownload pada langkah ke-2 di PC/Laptop sesuai dengan versi OS yang dimiliki (64 bit atau 32 bit).
+ 4. Jika proses instalasi telah selesai dengan benar, ikon R akan muncul pada dekstop.
+
+
+### RGUI vs RStudio
+ *  RGUI: Standar UI untuk **me-manage** R *environment* yang didapat setelah menginstall R
+ *  Rstudio: IDE yang dirancang khusus untuk memudahkan kita dalam proses **koding** dan **project management**
+ 
+### Instalasi R studio
+ 1. Buka halaman download RStudio pada link https://www.rstudio.com/products/rstudio/download/
+ 2. Klik tombol download pada kolom RStudio Dekstop FREE. Kemudian, tampilan akan diarahkan pada bagian halaman Installers for Supported Platforms.
+ 3. Klik link bertuliskan RStudio 1.*.*** - Windows Vista/7/8/10 (asumsi menggunakan OS Windows), lakukan proses download.
+ 4. Install file yang terdownload pada langkah ke-4 di PC/Laptop. Pilih opsi default untuk setiap tahapan instalasi. Jika proses instalasi telah selesai dengan benar, ikon RStudio akan muncul pada dekstop ataupun toolbar.
+
+> ## R Studio's working area
+
+### Source/Editor
+  
+  ![Source image](C:\Users\Nashir\Downloads\1 N5C0tTihsDRZyQKrqXlv1g.png)
+
+<t/> Source/Editor window adalah jendela yang dapat digunakan untuk **membuat, mengedit, dan menyimpan** script R. Pada jendela ini, tersedia fitur autocomplete yang akan memudahkan kita dalam membuat script.
+
+### Console
+
+  ![Source image](C:\Users\Nashir\Downloads\1 MM3Hd67N6tZqjw6rvQmxlA.png)
+  
+<t/>  *Console window* adalah jendela tempat mengeksekusi command dari script R yang dibuat. Script tersebut dapat dijalankan dari Source/Editor window maupun dengan langsung mengetikkan script pada jendela ini. Jendela ini akan menampilkan output dari setiap satu proses/baris command R yang dijalankan.
+
+### Environment/History/Connections
+
+  ![Source image](C:\Users\Nashir\Downloads\1 Hq9wlNqIBK-tUPsGtyviEw.png)
+
+<t/> Tab environment akan menampilkan daftar data dan nilai yang sedang aktif tersimpan didalam memory (RAM). Kita dapat melihat data atau nilai tersebut dengan mengklik nama data tersebut. Tab History akan menampilkan daftar command yang telah dijalankan sebelumnya dalam satu session yang aktif. Adapun tab Connection merupakan tab khusus yang berkaitan dengan koneksi ke database seperti mySQL, postgreSQL, Spark, dll.
+
+### Fitur Lainnya
+
+  ![Source image](C:\Users\Nashir\Downloads\1 Wje4rAVT0P4E3i2GUJPsCg.png)
+
+Jendela ini merupakan fitur tambahan yang bermanfaat khususnya dalam manajemen file, menampilkan output command berupa plot, informasi dan bantuan dalam penulisan script, dan web viewer.
+
+> ## Packages
+
+## Find Packages
+#### Memeriksa ketersediaan packages
+```{r}
+"ggplot2" %in% installed.packages()[,'Package']
+```
+cara ini bisa dilakukan dengan GUI di R studio.
+
+#### Install 
+```{r, eval=FALSE}
+install.packages("ggplot2")
+```
+
+#### Load
+```{r}
+library("ggplot2")
+```
+
+```{r}
+require("ggplot2")
+```
+
+> ## Membaca data dari sumber external
+
+File dalam format csv
+```{r, eval=FALSE}
+read.csv2("link ke data")
+```
+File dalam format excel
+```{r, eval=FALSE}
+require(readxl)
+read_excel("alamat file")
+```
+
+File dalam format lain
+```{r,eval=FALSE}
+read.table("alamat ke file") 
+```
+
+> ## Tipe data non-primitif di R
+
+####Vector
+Satu atau sekulumpulan elemen dengan tipe data sama.
+```{r}
+vctr <- c(1:5)
+vctr2 <- c(6:10)
+```
+```{r}
+vctr * 2
+vctr / 2
+vctr + 2
+vctr - 2
+```
+
+```{r}
+vctr * vctr2
+vctr / vctr2
+vctr + vctr2
+vctr - vctr2
+```
+```{r}
+c(1,2) %*% c(2,3)
+```
+
+#### List
+list adalah sebuah objek dalam R yang dapat berisi elemen-elemen lain yang berbeda tipe datanya misal (bilangan, string, list lain, dan fungsi).
+```{r}
+vec <- c(1,2,3)
+char_vec <- c("Hadoop", "Spark", "Flink", "Mahout")
+logic_vec <- c(TRUE, FALSE, TRUE, FALSE)
+out_list <- list(vec, char_vec, logic_vec)
+```
+```{r}
+names(out_list) <- c("number", "str", "bool")
+print(out_list)
+```
+
+```{r}
+out_list$number
+```
+
+
+#### Array
+Objek satu atau dua dimensi atau lebih pada R yang dapat menyimpan data.
+```{r}
+vector1 <- c(5,9,3)
+vector2 <- c(10,11,12,13,14,15)
+result <- array(c(vector1,vector2),dim = c(3,3,2))
+print(result)
+result
+```
+
+
+### Matriks
+Kumpulan bilangan yang disusun secara baris atau kolom atau kedua-duanya dan di dalam suatu tanda kurung.
+```{r}
+m1 <- matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE)
+m2 <- matrix(10:18, nrow = 3, ncol = 3, byrow = TRUE)
+
+#check matriks dimmension
+dim(m1)
+```
+```{r}
+#determinan
+det(m1)
+```
+
+```{r}
+#transspose
+t(m1)
+```
+
+```{r, eval=FALSE}
+#inverse
+solve(m1)
+```
+
+```{r}
+#diagonal
+diag(m1)
+```
+
+```{r}
+#perkalian matriks
+m1 %*% m2
+```
+```{r}
+#Pekalian dot
+m1 * m2
+```
+
+### Data frame
+Sebuah objek dua dimensi, dimana tiap kolom berisi kumpulan nilai dari sebuah variabel dan tiap baris beris kumpulan nilai untuk suatu entitas atau observasi.
+```{r}
+df = data.frame(
+   emp_id = c (1:5), 
+   emp_name = c("Rick","Dan","Michelle","Ryan",NA),
+   salary = c(623.3,515.2,611.0,729.0,NaN), 
+   
+   start_date = as.Date(c("2012-01-01", "2013-09-23", "2014-11-15", "2014-05-11",
+      "2015-03-27")),
+   stringsAsFactors = FALSE
+)
+df
+```
+
+```{r}
+#head
+head(df)
+```
+
+```{r}
+#tailing observation
+tail(df,1)
+```
+```{r}
+#dimension
+dim(df)
+```
+
+> ## Missing value detection
+
+**Missing Value**: pada R *missing value* direpresentasikan dengan simbol NA (Not Available). Sedangkan, nilai yang tidak mungkin atau imaginer direpresentasikan dengan NaN (Not a Number).
+
+### Mendeteksi missing value
+
+#### Total missing value
+```{r}
+sum(is.na(df))
+```
+#### Lokasi missing value
+```{r}
+which(is.na(df))
+```
+
+
+
+```{r}
+df[!complete.cases(df),]
+```
+
+#### Jumlah NA tiap kolom
+```{r}
+apply(df, 2, function(x) sum(is.na(x)))
+
+```
+
+#### Menghilangkan obeservasi dengan missing value
+```{r}
+na.omit(df)
+```
+#### Mengkodekan ulang missing value
+```{r}
+df$salary[is.na(df$salary)] <- 32
+```
+
+>## Megedit nama kolom dan baris
+
+#### Mengedit nama kolom 
+```{r}
+colnames(df)
+
+colnames(df) <- c('satu', 'dua', 'tiga','empat')
+df
+
+colnames(df)[3] <- "3"
+df
+```
+
+### Mengedit nama baris
+```{r}
+row.names(df)
+
+row.names(df) <- c('satu', 'dua', 'tiga','empat', 'lima')
+df
+
+row.names(df)[3] <- "3"
+df
+```
+
+> ## Internal Structure of R object
+
+```{r}
+str(5)
+```
+
+```{r}
+str(c(2,4,1,5,7))
+```
+
+```{r}
+str(df)
+```
+
+```{r}
+summary(df)
+```
+Five Number Summary + Mean
